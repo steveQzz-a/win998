@@ -1,0 +1,369 @@
+/**
+ * Account Service - User account management
+ *
+ * Endpoints:
+ * - POST /api/accounts - Create account
+ * - GET /api/accounts/{accountId} - Get account by ID
+ * - GET /api/accounts/phone/{phoneNumber} - Get account by phone
+ * - GET /api/accounts/{accountId}/balance - Get wallet balance
+ */
+
+const API_BASE = 'https://accounts.team33.mx';
+
+// Format phone number to E.164 format (+61...)
+const formatPhoneNumber = (phone) => {
+  if (!phone) return phone;
+  let cleaned = phone.replace(/\D/g, '');
+
+  if (cleaned.startsWith('0')) {
+    return '+61' + cleaned.substring(1);
+  }
+  if (!cleaned.startsWith('61')) {
+    return '+61' + cleaned;
+  }
+  return '+' + cleaned;
+};
+
+class AccountService {
+  /**
+   * Create a new account
+   * POST /api/accounts
+   */
+  async createAccount({ firstName, lastName, phoneNumber, password, referralCode }) {
+    try {
+      const formattedPhone = formatPhoneNumber(phoneNumber);
+
+      // Build request body, only include referralCode if provided
+      const requestBody = {
+        firstName,
+        lastName,
+        phoneNumber: formattedPhone,
+        password,
+      };
+
+      if (referralCode) {
+        requestBody.referralCode = referralCode;
+      }
+
+      const response = await fetch(`${API_BASE}/api/accounts`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody),
+      });
+
+      // Handle empty or non-JSON responses
+      let data = {};
+      try {
+        const contentType = response.headers.get('content-type');
+        if (contentType?.includes('application/json')) {
+          data = await response.json();
+        }
+      } catch (e) {
+        // Empty response body
+      }
+
+      if (response.status === 201 || response.ok) {
+        return {
+          success: true,
+          account: data,
+          accountId: data.accountId,
+        };
+      }
+
+      // Handle specific error codes
+      if (response.status === 401) {
+        return {
+          success: false,
+          error: 'Authentication failed. Please try again.',
+          code: 'UNAUTHORIZED',
+        };
+      }
+
+      if (response.status === 409) {
+        return {
+          success: false,
+          error: 'An account with this phone number already exists.',
+          code: 'DUPLICATE',
+        };
+      }
+
+      if (response.status === 503) {
+        return {
+          success: false,
+          error: data.error || 'Service temporarily unavailable. Please try again later.',
+          code: 'SERVICE_UNAVAILABLE',
+        };
+      }
+
+      return {
+        success: false,
+        error: data.message || data.error || 'Failed to create account',
+      };
+    } catch (error) {
+      console.error('[AccountService] Create error:', error);
+      return {
+        success: false,
+        error: 'Network error. Please check your connection.',
+      };
+    }
+  }
+
+  /**
+   * Login with phone and password
+   * POST /api/accounts/login
+   */
+  async login(phoneNumber, password) {
+    try {
+      const formattedPhone = formatPhoneNumber(phoneNumber);
+
+      const response = await fetch(`${API_BASE}/api/accounts/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          phoneNumber: formattedPhone,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      // Check backend success field or HTTP status
+      if (response.status === 401 || data.success === false) {
+        return {
+          success: false,
+          error: data.message || 'Invalid phone number or password.',
+          code: 'INVALID_CREDENTIALS',
+        };
+      }
+
+      if (!response.ok) {
+        return {
+          success: false,
+          error: data.message || 'Login failed. Please try again.',
+          code: 'ERROR',
+        };
+      }
+
+      // Build account object from response
+      return {
+        success: true,
+        account: {
+          accountId: data.accountId,
+          firstName: data.firstName,
+          lastName: data.lastName,
+        },
+        accountId: data.accountId,
+      };
+    } catch (error) {
+      console.error('[AccountService] Login error:', error);
+      return {
+        success: false,
+        error: 'Network error. Please check your connection.',
+      };
+    }
+  }
+
+  /**
+   * Get account by ID
+   * GET /api/accounts/{accountId}
+   */
+  async getAccount(accountId) {
+    try {
+      const response = await fetch(`${API_BASE}/api/accounts/${accountId}`);
+
+      if (!response.ok) {
+        return { success: false, error: 'Account not found' };
+      }
+
+      const data = await response.json();
+      return { success: true, account: data };
+    } catch (error) {
+      console.error('[AccountService] Get error:', error);
+      return { success: false, error: 'Failed to fetch account' };
+    }
+  }
+
+  /**
+   * Get account by phone number
+   * GET /api/accounts/phone/{phoneNumber}
+   */
+  async getAccountByPhone(phoneNumber) {
+    try {
+      const formattedPhone = formatPhoneNumber(phoneNumber);
+
+      // Don't URL-encode the phone - backend expects raw +61... format
+      const response = await fetch(
+        `${API_BASE}/api/accounts/phone/${formattedPhone}`
+      );
+
+      if (!response.ok) {
+        return { success: false, error: 'Account not found' };
+      }
+
+      const data = await response.json();
+      return { success: true, account: data };
+    } catch (error) {
+      console.error('[AccountService] Get by phone error:', error);
+      return { success: false, error: 'Failed to fetch account' };
+    }
+  }
+
+  /**
+   * Get wallet balance
+   * GET /api/accounts/{accountId}/balance
+   */
+  async getBalance(accountId) {
+    try {
+      const response = await fetch(`${API_BASE}/api/accounts/${accountId}/balance`);
+
+      if (!response.ok) {
+        return { success: false, error: 'Failed to get balance', balance: 0 };
+      }
+
+      const data = await response.json();
+      return {
+        success: true,
+        balance: data.balance ?? 0,
+        currency: data.currency || 'AUD',
+      };
+    } catch (error) {
+      console.error('[AccountService] Balance error:', error);
+      return { success: false, error: 'Failed to fetch balance', balance: 0 };
+    }
+  }
+
+  /**
+   * Delete account
+   * DELETE /api/accounts/{accountId}
+   */
+  async deleteAccount(accountId) {
+    try {
+      const response = await fetch(`${API_BASE}/api/accounts/${accountId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        return { success: false, error: 'Failed to delete account' };
+      }
+
+      return { success: true };
+    } catch (error) {
+      console.error('[AccountService] Delete error:', error);
+      return { success: false, error: 'Failed to delete account' };
+    }
+  }
+
+  /**
+   * Update account details (firstName, lastName)
+   * PATCH /api/accounts/{accountId}
+   */
+  async updateAccount(accountId, updates) {
+    try {
+      const body = {};
+      if (updates.firstName !== undefined) body.firstName = updates.firstName;
+      if (updates.lastName !== undefined) body.lastName = updates.lastName;
+
+      const response = await fetch(`${API_BASE}/api/accounts/${accountId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+
+      if (response.status === 204 || response.ok) {
+        return { success: true };
+      }
+
+      let errorMessage = 'Failed to update account';
+      try {
+        const data = await response.json();
+        errorMessage = data.error || data.message || errorMessage;
+      } catch (e) {}
+
+      return { success: false, error: errorMessage };
+    } catch (error) {
+      console.error('[AccountService] Update account error:', error);
+      return { success: false, error: 'Network error. Please check your connection.' };
+    }
+  }
+
+  /**
+   * Update password
+   * PATCH /api/accounts/{accountId}/password
+   *
+   * @param {string} accountId - Account ID
+   * @param {string} currentPassword - Current password
+   * @param {string} newPassword - New password (min 6 chars)
+   * @returns {Object} - { success: boolean, error?: string }
+   */
+  async updatePassword(accountId, currentPassword, newPassword) {
+    try {
+      // Validate new password length
+      if (!newPassword || newPassword.length < 6) {
+        return {
+          success: false,
+          error: 'New password must be at least 6 characters long.',
+        };
+      }
+
+      // Validate current password is provided
+      if (!currentPassword) {
+        return {
+          success: false,
+          error: 'Current password is required.',
+        };
+      }
+
+      const response = await fetch(`${API_BASE}/api/accounts/${accountId}/password`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          currentPassword,
+          newPassword,
+        }),
+      });
+
+      // 204 No Content means success
+      if (response.status === 204) {
+        return { success: true };
+      }
+
+      // Handle error responses
+      let errorMessage = 'Failed to update password';
+      try {
+        const data = await response.json();
+        errorMessage = data.error || data.message || errorMessage;
+      } catch (e) {
+        // No JSON body
+      }
+
+      // Handle specific error cases
+      if (response.status === 400) {
+        return {
+          success: false,
+          error: errorMessage,
+        };
+      }
+
+      if (response.status === 404) {
+        return {
+          success: false,
+          error: 'Account not found.',
+        };
+      }
+
+      return {
+        success: false,
+        error: errorMessage,
+      };
+    } catch (error) {
+      console.error('[AccountService] Update password error:', error);
+      return {
+        success: false,
+        error: 'Network error. Please check your connection.',
+      };
+    }
+  }
+}
+
+export const accountService = new AccountService();
+export default accountService;

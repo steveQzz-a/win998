@@ -1,0 +1,739 @@
+/* Login Page - Golden Casino Design */
+
+.login-page-golden {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.login-page-golden > * {
+  width: 100%;
+  max-width: var(--container-max);
+  background: linear-gradient(145deg, #1a1208 0%, #120e06 60%, #09060a 100%);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(251, 191, 36, 0.06) inset,
+    0 8px 40px rgba(0, 0, 0, 0.5),
+    0 0 80px rgba(251, 191, 36, 0.06);
+}
+
+/* ========== Two Column Layout for Desktop ========== */
+.login-layout {
+  display: flex;
+  min-height: calc(100vh - 200px);
+  position: relative;
+  z-index: 2;
+}
+
+/* Banner Section - Left Side on Desktop */
+.login-banner {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+}
+
+.login-banner img {
+  max-width: 100%;
+  max-height: 80vh;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+}
+
+/* Form Section - Right Side on Desktop */
+.login-form-section {
+  flex: 0 0 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 50px;
+  position: relative;
+}
+
+/* ========== Login Container ========== */
+.login-container-golden {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ========== Login Title ========== */
+.login-title-golden {
+  font-family: var(--font-primary);
+  font-size: 32px;
+  font-weight: 700;
+  font-style: italic;
+  background: linear-gradient(180deg, #fef08a 0%, #fcd34d 30%, #d4a012 60%, #b8860b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 28px 0;
+  text-shadow: 0 2px 20px rgba(212, 160, 18, 0.3);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* ========== Form Styles ========== */
+.login-form-golden {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group-golden {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-label-golden {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.3px;
+}
+
+.form-input-golden {
+  width: 100%;
+  height: 58px;
+  min-height: 58px;
+  padding: 16px 20px;
+  background: #fff !important;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.form-input-golden::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.form-input-golden:focus {
+  box-shadow: 0 0 0 2px rgba(212, 160, 18, 0.4), 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Password Input Wrapper */
+.password-input-wrap {
+  position: relative;
+}
+
+.password-input-wrap .form-input-golden {
+  padding-right: 50px;
+}
+
+.password-toggle-golden {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.password-toggle-golden:hover {
+  color: #d4a012;
+  background: rgba(212, 160, 18, 0.1);
+}
+
+/* ========== Login Button ========== */
+.login-btn-golden {
+  width: 100%;
+  height: 60px;
+  margin-top: 8px;
+  background: linear-gradient(180deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+  border: none;
+  border-radius: 2px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-btn-golden::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: left 0.5s ease;
+}
+
+.login-btn-golden:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.login-btn-golden:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+}
+
+.login-btn-golden:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.login-btn-golden:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ========== Register Section ========== */
+.login-page-golden .register-section-golden {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.login-page-golden .register-text-golden {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 12px 0;
+  font-weight: 400;
+}
+
+.login-page-golden .register-btn-golden {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(180deg, #fef08a 0%, #d4a012 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+  transition: all 0.2s;
+  width: auto;
+  height: auto;
+  border: none;
+  border-radius: 0;
+  letter-spacing: normal;
+  text-transform: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+.login-page-golden .register-btn-golden:hover {
+  filter: brightness(1.2);
+  background: rgba(251, 191, 36, 0);
+  transform: none;
+  box-shadow: none;
+}
+
+/* ========== Forgot Password ========== */
+.forgot-link-golden {
+  display: block;
+  text-align: center;
+  margin-top: 24px;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(180deg, #fef08a 0%, #d4a012 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.forgot-link-golden:hover {
+  filter: brightness(1.2);
+  text-shadow: 0 0 20px rgba(212, 160, 18, 0.5);
+}
+
+/* ========== Side Action Buttons ========== */
+.side-actions {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  z-index: 99;
+}
+
+.side-action-btn {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  padding: 16px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.side-action-btn.follow {
+  background: linear-gradient(180deg, #1877f2, #0d5bbf);
+  border-radius: 2px;
+}
+
+.side-action-btn.complain {
+  background: linear-gradient(180deg, #ff6b35, #d4521d);
+  border-radius: 2px;
+}
+
+.side-action-btn:hover {
+  padding-right: 16px;
+}
+
+.side-action-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+
+/* ========== Back Button - Hidden when in Layout ========== */
+.back-btn-golden {
+  display: none;
+}
+
+/* ========== Side Actions - Hidden when in Layout ========== */
+.login-page-golden .side-actions {
+  display: none;
+}
+
+/* ========== OTP Modal Styles ========== */
+.otp-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  animation: overlayFadeIn 0.3s ease;
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.otp-modal {
+  background: linear-gradient(180deg, rgba(20, 15, 5, 0.98) 0%, rgba(10, 8, 3, 0.99) 100%);
+  border-radius: 2px;
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  padding: 40px 32px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.3),
+    0 25px 50px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.otp-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.otp-modal-close:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.otp-modal-close:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.otp-modal-header {
+  margin-bottom: 28px;
+}
+
+.otp-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  background: linear-gradient(135deg, var(--gold-500), var(--gold-600));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  box-shadow: 0 8px 24px rgba(251, 191, 36, 0.35);
+}
+
+.otp-modal-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.otp-modal-header p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+}
+
+.otp-modal-header p strong {
+  color: var(--gold-400);
+  font-weight: 600;
+}
+
+/* OTP Input Boxes */
+.otp-inputs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.otp-inputs input {
+  width: 48px;
+  height: 58px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  color: #fff;
+  transition: all 0.2s ease;
+  caret-color: var(--gold-500);
+}
+
+.otp-inputs input:focus {
+  outline: none;
+  border-color: var(--gold-500);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.15);
+}
+
+.otp-inputs input.otp-error {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.otp-inputs input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.otp-error-message {
+  color: #ef4444;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.otp-verify-btn {
+  width: 100%;
+  height: 52px;
+  background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-600) 100%);
+  border: none;
+  border-radius: 2px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+}
+
+.otp-verify-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(251, 191, 36, 0.5);
+}
+
+.otp-verify-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.otp-resend {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.otp-resend p {
+  margin: 0;
+}
+
+.otp-resend strong {
+  color: var(--gold-400);
+}
+
+.otp-resend button {
+  background: none;
+  border: none;
+  color: var(--gold-400);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
+.otp-resend button:hover:not(:disabled) {
+  background: rgba(251, 191, 36, 0.1);
+  color: var(--gold-300);
+}
+
+.otp-resend button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ========== DESKTOP - Large screens ========== */
+@media (min-width: 1024px) {
+  .login-layout {
+    flex-direction: row;
+  }
+
+  .login-banner {
+    flex: 1;
+    min-height: calc(100vh - 200px);
+  }
+
+  .login-form-section {
+    flex: 0 0 520px;
+    background: #0a0806;
+  }
+
+  .login-title-golden {
+    display: none;
+  }
+}
+
+/* ========== TABLET ========== */
+@media (max-width: 1023px) {
+  .login-layout {
+    flex-direction: column;
+  }
+
+  .login-banner {
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .login-banner img {
+    width: 100%;
+    max-height: 40vh;
+    object-fit: cover;
+    object-position: center;
+    filter: none;
+  }
+
+  .login-form-section {
+    flex: 1;
+    padding: 24px 20px 40px;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+    background: #0a0806;
+    position: relative;
+    z-index: 10;
+  }
+
+  .login-container-golden {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .login-title-golden {
+    display: block;
+  }
+}
+
+/* ========== MOBILE ========== */
+@media (max-width: 768px) {
+  .login-banner img {
+    max-height: 35vh;
+  }
+
+  .login-form-section {
+    padding: 20px 16px 32px;
+  }
+
+  .login-title-golden {
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-banner img {
+    max-height: 30vh;
+  }
+
+  .login-form-section {
+    padding: 20px 16px 28px;
+  }
+
+  .login-title-golden {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  .form-label-golden {
+    font-size: 15px;
+  }
+
+  .form-input-golden {
+    height: 54px;
+    font-size: 16px;
+  }
+
+  .password-input-wrap .form-input-golden {
+    height: 54px;
+  }
+
+  .login-btn-golden {
+    height: 56px;
+    font-size: 16px;
+  }
+
+  .register-text-golden {
+    font-size: 15px;
+  }
+
+  .register-btn-golden {
+    height: 50px;
+    font-size: 15px;
+  }
+
+  .forgot-link-golden {
+    font-size: 15px;
+    margin-top: 20px;
+  }
+
+  /* OTP Modal Mobile */
+  .otp-modal {
+    padding: 32px 24px;
+    margin: 16px;
+    border-radius: 2px;
+  }
+
+  .otp-modal-close {
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .otp-icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .otp-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .otp-modal-header h2 {
+    font-size: 20px;
+  }
+
+  .otp-inputs {
+    gap: 8px;
+  }
+
+  .otp-inputs input {
+    width: 44px;
+    height: 54px;
+    font-size: 22px;
+    border-radius: 2px;
+  }
+}
+
+@media (max-width: 360px) {
+  .login-banner img {
+    max-height: 25vh;
+  }
+
+  .login-title-golden {
+    font-size: 24px;
+  }
+
+  .form-input-golden {
+    height: 52px;
+  }
+
+  .login-btn-golden {
+    height: 52px;
+  }
+
+  .gold-coin {
+    width: 24px;
+    height: 24px;
+  }
+
+  .gold-coin::before {
+    font-size: 12px;
+  }
+}
+
+/* ========== Dev Login Button (Testing Only) ========== */
+

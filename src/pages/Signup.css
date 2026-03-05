@@ -1,0 +1,660 @@
+/* Signup Page - Golden Casino Design (matching Login) */
+
+.signup-page-golden {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.signup-page-golden > * {
+  width: 100%;
+  max-width: var(--container-max);
+  background: linear-gradient(145deg, #1a1208 0%, #120e06 60%, #09060a 100%);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(251, 191, 36, 0.06) inset,
+    0 8px 40px rgba(0, 0, 0, 0.5),
+    0 0 80px rgba(251, 191, 36, 0.06);
+}
+
+/* ========== Layout ========== */
+.signup-layout {
+  display: flex;
+  min-height: calc(100vh - 200px);
+  position: relative;
+  z-index: 2;
+}
+
+/* Banner Section */
+.signup-banner {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.signup-banner img {
+  max-width: 100%;
+  max-height: 80vh;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+}
+
+/* Form Section */
+.signup-form-section {
+  flex: 0 0 600px;
+  padding: 30px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: transparent;
+}
+
+/* Desktop - side by side */
+@media (min-width: 1024px) {
+  .signup-layout {
+    flex-direction: row;
+  }
+
+  .signup-banner {
+    flex: 1;
+    min-height: calc(100vh - 200px);
+  }
+
+  .signup-form-section {
+    flex: 0 0 600px;
+    background: transparent;
+  }
+}
+
+/* ========== Form Row - Inline Layout ========== */
+.signup-form-golden {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-row-inline {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.form-label-inline {
+  flex: 0 0 140px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-label-inline::after {
+  content: ':';
+  color: #fff;
+}
+
+.form-input-inline {
+  flex: 1;
+  height: 58px;
+  min-height: 58px;
+  padding: 16px 20px;
+  background: #fff !important;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.form-input-inline::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.form-input-inline:focus {
+  box-shadow: 0 0 0 2px rgba(212, 160, 18, 0.4), 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Hint text below input */
+.form-hint-golden {
+  margin-left: 156px;
+  margin-top: -16px;
+  font-size: 14px;
+  color: #d4a012;
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* Password wrapper for toggle */
+.password-wrap-inline {
+  flex: 1;
+  position: relative;
+}
+
+.password-wrap-inline .form-input-inline {
+  padding-right: 50px;
+  width: 100%;
+}
+
+.password-toggle-inline {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.password-toggle-inline:hover {
+  color: #d4a012;
+  background: rgba(212, 160, 18, 0.1);
+}
+
+/* ========== OTP Section ========== */
+.otp-section-inline {
+  background: transparent;
+  border-radius: 0;
+  padding: 16px 0 0 0;
+  margin-top: 0;
+  border: none;
+}
+
+.otp-instruction {
+  font-size: 15px;
+  color: #fff;
+  margin: 0 0 16px 0;
+  font-weight: 500;
+}
+
+.otp-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.otp-input-inline {
+  flex: 1;
+  height: 58px;
+  min-height: 58px;
+  padding: 16px 20px;
+  background: #fff !important;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  letter-spacing: 8px;
+  outline: none;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.otp-input-inline::placeholder {
+  color: #999;
+  font-style: italic;
+  letter-spacing: normal;
+}
+
+.otp-input-inline:focus {
+  box-shadow: 0 0 0 2px rgba(212, 160, 18, 0.4);
+}
+
+.get-code-btn {
+  flex: 0 0 auto;
+  height: 58px;
+  padding: 0 32px;
+  background: linear-gradient(180deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+  border: none;
+  border-radius: 2px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+}
+
+.get-code-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+}
+
+.get-code-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.otp-timer {
+  margin-top: 12px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.otp-timer span {
+  color: var(--gold-400);
+  font-weight: 600;
+}
+
+.otp-resend-btn {
+  background: none;
+  border: none;
+  color: var(--gold-400);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0;
+  margin-top: 8px;
+}
+
+.otp-resend-btn:hover:not(:disabled) {
+  color: var(--gold-300);
+  text-decoration: underline;
+}
+
+.otp-resend-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ========== Register Button ========== */
+.signup-page-golden .register-btn-golden {
+  width: 100%;
+  height: 60px;
+  margin-top: 12px;
+  background: linear-gradient(180deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+  border: none;
+  border-radius: 2px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+  position: relative;
+  overflow: hidden;
+  -webkit-text-fill-color: #000;
+}
+
+.signup-page-golden .register-btn-golden::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: left 0.5s ease;
+}
+
+.signup-page-golden .register-btn-golden:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.signup-page-golden .register-btn-golden:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+}
+
+.signup-page-golden .register-btn-golden:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ========== Login Link Section ========== */
+.login-link-section {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.login-link-section p {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 12px 0;
+}
+
+.login-link-golden {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(180deg, #fef08a 0%, #d4a012 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.login-link-golden:hover {
+  filter: brightness(1.2);
+}
+
+/* ========== Side Actions (same as login) ========== */
+.side-actions {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  z-index: 99;
+}
+
+.side-action-btn {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  padding: 16px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.side-action-btn.follow {
+  background: linear-gradient(180deg, #1877f2, #0d5bbf);
+  border-radius: 2px;
+}
+
+.side-action-btn.complain {
+  background: linear-gradient(180deg, #ff6b35, #d4521d);
+  border-radius: 2px;
+}
+
+.side-action-btn:hover {
+  padding-right: 16px;
+}
+
+.side-action-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+
+/* ========== Back Button - Hidden when in Layout ========== */
+.signup-page-golden .back-btn-golden {
+  display: none;
+}
+
+/* ========== Side Actions - Hidden when in Layout ========== */
+.signup-page-golden .side-actions {
+  display: none;
+}
+
+/* ========== Status Messages ========== */
+.otp-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.otp-status.success {
+  color: var(--gold-400);
+}
+
+.otp-status.error {
+  color: #ef4444;
+}
+
+.otp-status svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ========== Referral Code Section ========== */
+.referral-row {
+  margin-top: 8px;
+}
+
+.referral-input-wrap {
+  flex: 1;
+  position: relative;
+}
+
+.referral-input-wrap .form-input-inline {
+  padding-right: 50px;
+  width: 100%;
+}
+
+.referral-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold-500);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.referral-hint {
+  color: var(--gold-400) !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+}
+
+/* Password input wrapper */
+.password-input-wrap {
+  flex: 1;
+  position: relative;
+}
+
+.password-input-wrap .form-input-inline {
+  padding-right: 50px;
+  width: 100%;
+}
+
+.password-toggle-golden {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.password-toggle-golden:hover {
+  color: var(--gold-500);
+  background: rgba(251, 191, 36, 0.1);
+}
+
+/* ========== TABLET & MOBILE - Stacked Layout ========== */
+@media (max-width: 1023px) {
+  .signup-layout {
+    flex-direction: column;
+  }
+
+  .signup-banner {
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .signup-banner img {
+    width: 100%;
+    max-height: 40vh;
+    object-fit: cover;
+    object-position: center;
+    filter: none;
+  }
+
+  .signup-form-section {
+    flex: 1;
+    padding: 24px 20px 40px;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+    background: transparent;
+    position: relative;
+    z-index: 10;
+  }
+}
+
+/* ========== MOBILE ========== */
+@media (max-width: 768px) {
+  .signup-banner img {
+    max-height: 35vh;
+  }
+
+  .signup-form-section {
+    padding: 20px 16px 32px;
+  }
+
+  .form-row-inline {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .form-label-inline {
+    flex: none;
+  }
+
+  .form-label-inline::after {
+    display: none;
+  }
+
+  .form-input-inline {
+    width: 100%;
+    height: 56px;
+  }
+
+  .password-wrap-inline {
+    width: 100%;
+  }
+
+  .password-wrap-inline .form-input-inline {
+    width: 100%;
+    height: 56px;
+  }
+
+  .form-hint-golden {
+    margin-left: 0;
+    margin-top: -12px;
+  }
+
+  .otp-row {
+    flex-direction: column;
+  }
+
+  .otp-input-inline {
+    width: 100%;
+    height: 56px;
+  }
+
+  .get-code-btn {
+    width: 100%;
+    height: 56px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signup-banner img {
+    max-height: 30vh;
+  }
+
+  .signup-form-golden {
+    gap: 18px;
+  }
+
+  .form-label-inline {
+    font-size: 15px;
+  }
+
+  .form-input-inline {
+    height: 54px;
+    font-size: 16px;
+  }
+
+  .password-wrap-inline .form-input-inline {
+    height: 54px;
+  }
+
+  .otp-input-inline {
+    height: 54px;
+  }
+
+  .get-code-btn {
+    height: 54px;
+  }
+
+  .otp-section-inline {
+    padding: 16px 0 0 0;
+  }
+
+  .otp-instruction {
+    font-size: 14px;
+  }
+
+  .register-btn-golden {
+    height: 56px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .signup-banner img {
+    max-height: 25vh;
+  }
+
+  .form-input-inline {
+    height: 52px;
+  }
+
+  .password-wrap-inline .form-input-inline {
+    height: 52px;
+  }
+
+  .otp-input-inline {
+    height: 52px;
+  }
+
+  .get-code-btn {
+    height: 52px;
+    padding: 0 24px;
+    font-size: 14px;
+  }
+
+  .signup-page-golden .register-btn-golden {
+    height: 54px;
+  }
+}
